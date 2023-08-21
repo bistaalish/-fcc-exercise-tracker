@@ -9,6 +9,7 @@
 	"dependencies": {
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
+		"eslint": "^8.47.0",
 		"express": "^4.16.4",
 		"nodemon": "^3.0.1"
 	},
@@ -19,5 +20,8 @@
 	"keywords": [
 		"node",
 		"express"
-	]
+	],
+	"devDependencies": {
+		"prettier": "3.0.2"
+	}
 }
