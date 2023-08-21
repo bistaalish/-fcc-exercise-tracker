@@ -1,8 +1,9 @@
+const mongoose = require('mongoose');
+
 /**
  * ! This is a exercise Model
  * @param userId description, date 
  */
-const mongoose = require('mongoose');
 
 const exerciseSchema = new mongoose.Schema({
     userId: {
@@ -24,6 +25,4 @@ const exerciseSchema = new mongoose.Schema({
     
 });
 
-const Exercise = mongoose.model('exercise', exerciseSchema)
-
-module.exports = Exercise
+const Exercise = mongoose.model('Exercise', exerciseSchema)
