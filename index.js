@@ -10,6 +10,7 @@ app.get('/', (req, res) => {
 });
 
 
+// Adding routes
 
 
 
