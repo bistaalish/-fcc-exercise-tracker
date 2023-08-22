@@ -1,53 +1,25 @@
-import User from "../model/user";
+const User = require("../model/user");
 
-class UserController {
-  async store(req, res) {
-    return res.json({message: true});
-    // try {
-    //     const user = await User.findOne({username:req.body.username})
-    //     if(!user){
-            
-    //     }    
-    // } catch (error) {
-    //     res.status(500).send("Internal Server Error");
-    // }
-  }
-
-  async index(req, res) {
-    return res.json({message: "index"});
-  }
-
-  async create(req, res) {
-    return res.json();
-  }
-
-  async show(req, res) {
-    return res.json();
-  }
-
-  async edit(req, res) {
-    return res.json();
-  }
-
-  async update(req, res) {
-    return res.json();
-  }
-
-  async destroy(req, res) {
-    return res.json();
-  }
-
-  async view(req, res) {
-    return res.json();
-  }
-
-  async grid(req, res) {
-    return res.json();
-  }
-
-  async form(req, res) {
-    return res.json();
-  }
+const getUser = async (req,res) => {
+    // if user already exists
+    return res.json({"test":"done"})
+    // const user = User.findOne({username:username})
 }
 
-export default new UserController();
+const createUser = async (req,res) => {
+    // return res.json({test: "Post Successful"})   
+    const username = req.body;
+    if(typeof username == "undefined"){
+        return res.status(401).send("missing username")
+    } else {
+        const oldUser = await User.findOne(username);
+        if(oldUser){
+           return  res.json({_id:oldUser._id,username:oldUser.username})
+        } else {
+        const user = await User.create(username);
+        console.log(user)
+        return res.json({_id:user.id,username:user.username})
+        }
+    }
+}
+module.exports = {getUser,createUser}
