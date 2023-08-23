@@ -1,6 +1,5 @@
-const exercise = require('../models/exercise');
-const ExerciseModel = require('../models/exercise')
-const UserModel = require('../models/user')
+const ExerciseModel = require('../model/exercise')
+const UserModel = require('../model/user')
 
 
 // create a new exercise for a user
