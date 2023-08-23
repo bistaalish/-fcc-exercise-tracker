@@ -1,10 +1,12 @@
 const express = require('express');
-const { getUser,createUser } = require('../controller/userController');
+const apiRouter = express.Router();
+const userControllers = require('../controllers/userController');
+const exerciseController = require('../controllers/exerciseController');
 
-const router = express.Router();
+apiRouter
+    .get('/users', userControllers.getUsers)
+    .post('/users', userControllers.createUser)
+    .post('/users/:_id/exercises', exerciseController.createExercise)
+    .get('/users/:_id/logs', exerciseController.getExercises)
 
-// Adding get route
-router.get("/users",getUser);
-router.post("/users",createUser)
-
-module.exports = router;
+module.exports = apiRouter;

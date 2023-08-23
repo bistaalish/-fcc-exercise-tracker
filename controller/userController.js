@@ -1,25 +1,30 @@
-const User = require("../model/user");
+const UserModel = require('../models/user')
 
-const getUser = async (req,res) => {
-    // if user already exists
-    return res.json({"test":"done"})
-    // const user = User.findOne({username:username})
-}
-
-const createUser = async (req,res) => {
-    // return res.json({test: "Post Successful"})   
-    const username = req.body;
-    if(typeof username == "undefined"){
-        return res.status(401).send("missing username")
-    } else {
-        const oldUser = await User.findOne(username);
-        if(oldUser){
-           return  res.json({_id:oldUser._id,username:oldUser.username})
-        } else {
-        const user = await User.create(username);
-        console.log(user)
-        return res.json({_id:user.id,username:user.username})
-        }
+// create new user
+exports.createUser = async (req, res) => {
+    try {
+        const user = await UserModel.create(req.body)
+        return res.status(201).json({
+            "username": user.username,
+            "_id": user._id
+        })
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({
+            "message": "Server error"
+        })
     }
 }
-module.exports = {getUser,createUser}
+
+// get all users
+exports.getUsers = async (req, res) => {
+    try {
+        const users = await UserModel.find({})
+        return res.json(users)
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({
+            "message": "Server error"
+        })
+    }
+}
